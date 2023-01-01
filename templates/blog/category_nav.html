@@ -1,0 +1,21 @@
+{% load static %}
+
+{% block content %}
+
+<div class="col-md-3  grid-margin">
+  <div class="card">
+      <div class="card-body">
+          <h3 class="text-dark">Category</h3>
+             <ul class="vertical-menu">
+                  {% for category in categories %}
+                    <li><a  class="link-des" href="{% url 'blog_category' category.name %}">{{category.name}}</a></li>
+                  {% endfor %}
+             </ul>
+           </div>
+         </div>
+       </div>
+            
+
+
+
+    {% endblock %}

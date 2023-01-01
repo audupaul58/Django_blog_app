@@ -1,0 +1,53 @@
+{% extends 'base.html'%}
+{% load static %}
+
+{% block content %}
+<div class="row" data-aos="fade-up">
+	<div class="col-xl-8 stretch-card grid-margin">
+	  <div class="position-relative">
+		   <img
+                    src="{{post.image.url}}"
+					loading="lazy" decoding="async"
+                    alt="banner"
+                    class="img-fluid img-thumbnail"
+                  />
+		<h2 class="mb-2 font-weight-600 mt-3">{{ post.title }}</h2>
+	<small>
+		{{ info.created_on }} |&nbsp;
+		Categories:&nbsp;
+		{% for category in post.categories.all %}
+		<a href="{% url 'blog_category' category.name %}" class="cat_btn">
+			{{ category.name }}
+		</a>&nbsp;
+		{% endfor %}
+	</small>
+	<p> {{ post.body | linebreaks }}</p>
+	<h3>Leave a comment:</h3>
+	<form action="" >
+		{% csrf_token %}
+			{{form.as_p}}
+		<button hx-post="{% url 'blog_detail' post.pk%}" type="submit" class="btn btn-primary">Submit</button>
+	</form>
+	{% if comments %}
+		<h3>Comments:</h3>
+		{% for comment in comments %}
+		<p>
+			On {{ comment.created_on }}&nbsp;
+			<b> {{ comment.author }} </b> wrote:
+		</p>
+		<p>{{ comment.body }}</p>
+		<hr>
+		{% endfor %}
+	{% else %}
+		<p>There's no comments yet</p>
+	{% endif %}
+		
+	  </div>
+	</div>
+		{% include 'blog/related_post.html' %}
+	</div>
+  </div>
+<div class="col-md-8 offset-md-2">
+	
+</div>
+{% endblock content %}

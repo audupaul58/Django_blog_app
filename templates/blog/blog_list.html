@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+ {% include 'blog/hero_section.html'  %}
+
+ <div class="row" data-aos="fade-up">
+    {% include 'blog/category_nav.html' %}
+            <div class="col-lg-9 stretch-card grid-margin">
+                <div class="card">
+                  <div class="card-body">
+                      {% for post in posts %}
+                    <div class="row">
+                      <div class="col-sm-4 grid-margin">
+                        <div class="position-relative">
+                          <div class="rotate-img">
+                            <img
+                              src="{{post.image.url}}"
+                              alt="thumb"
+                              class="img-fluid"
+                            />
+                          </div>
+                            {% for category in post.categories.all %}
+                          <div class="badge-positioned">
+
+                            <span class="badge badge-danger font-weight-bold"
+                              >{{category.name}}</span
+                            >
+                          </div>
+                            {% endfor %}
+                        </div>
+                      </div>
+                      <div class="col-sm-8  grid-margin">
+                        <h3 class="mb-2 font-weight-600">
+                         <a class="link-des" href="{{post.get_absolute_url}}">{{post.title}}</a>
+                        </h3>
+                        <div class="fs-13 mb-2">
+                          <span class="mr-2"><small>Published on </span> {{post.created_on}}</small>
+                        </div>
+                        <p class="mb-0">
+                             <span class="mr-2"> {{ post.body | slice:":150" }} </span> <a class="link-des" href="{{post.get_absolute_url}}">Read more</a>
+                        </p>
+
+                    </div>
+                  
+                  </div>
+                      {% endfor %}
+                      {% if paginator.has_previous %}
+                      <a href="?page={{ paginator.previous_page_number }}">Previous</a>
+                  {% endif %}
+                  
+                  {% if paginator.has_next %}
+                      <a href="?page={{ paginator.next_page_number }}">Next</a>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+
+
+
+{%  endblock  %}
+

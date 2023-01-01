@@ -1,0 +1,35 @@
+{% load static %}
+
+{% block content %}
+
+         <div class="row" data-aos="fade-up">
+              <div class="col-xl-8 stretch-card grid-margin">
+                  {% for item in lastest_post %}
+                <div class="position-relative">
+                  <img
+                    src="{{item.image.url}}"
+                    alt="banner"
+                    class="img-fluid"
+                  />
+                  <div class="banner-content">
+                    <h2>Latest Post</h2>
+                    <div class="badge  fs-12 font-weight-bold">
+                        {{item.category.name}}
+                    </div>
+                    <h3 class="mb-1">
+                     <a class="link-des_black" href="{{item.get_absolute_url}}">{{item.title}}</a>
+                    </h3>
+                    <div class="fs-12">
+                      <span class="mr-2">Published: </span> {{item.created_on}}
+                    </div>
+                  </div>
+                </div>
+                  {% endfor %}
+              </div>
+              {% include 'blog/popular_post.html' %}
+              </div>
+            
+
+
+
+    {% endblock %}

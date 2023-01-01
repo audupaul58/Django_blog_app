@@ -1,0 +1,36 @@
+{% block content %}
+
+
+<div class="col-xl-4  grid-margin">
+    <div class="card bg-dark text-white">
+      <div class="card-body">
+        <h2>Related Post</h2>
+          {% for post in similar_posts %}
+
+        <div
+          class="d-flex border-bottom-blue pt-3 pb-4 align-items-center justify-content-between"
+        >
+          <div class="pr-3">
+            <h6><a class="link-des_black" href="{{post.get_absolute_url}}">{{post.title}}</a></h6>
+            <div class="fs-12">
+              <span class="mr-2">Published </span>{{post.created_on}}
+            </div>
+          </div>
+          <div class="rotate-img">
+            <img
+              src="{{post.image.url}}"
+              alt="thumb"
+              class="img-fluid img-lg"
+            />
+          </div>
+        </div>
+          {% endfor %}
+        </div>
+      </div>
+      
+    </div>
+
+   
+
+    {% endblock content %}
+    
